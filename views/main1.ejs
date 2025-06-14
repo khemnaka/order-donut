@@ -1,7 +1,157 @@
-<!-- views/step1.ejs -->
-<h2>เลือกโดนัทของคุณ 🍩</h2>
-<form action="/step2" method="POST">
-    <label>จำนวนชิ้น:</label>
-    <input type="number" name="quantity" value="1">
-    <button type="submit">ถัดไป</button>
-</form>
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>เลือกหน้าเคลือบโดนัท</title>
+  <style>
+    body {
+      font-family: 'Kanit', sans-serif;
+      background-color: #fffdf0;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: #fff;
+      padding: 24px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #795548;
+    }
+
+    .flavor {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 16px 0;
+    }
+
+    .flavor-name {
+      font-weight: bold;
+      width: 150px;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .controls button {
+      padding: 8px 14px;
+      border: none;
+      border-radius: 8px;
+      background-color: #ff80ab;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .controls button:disabled {
+      background-color: #ccc;
+      cursor: default;
+    }
+
+    .total {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 18px;
+    }
+
+    .next-button {
+      text-align: right;
+      margin-top: 30px;
+    }
+
+    .next-button button {
+      background-color: #ff4081;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 50px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .next-button button:hover {
+      background-color: #e91e63;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>เลือกหน้าเคลือบโดนัท</h2>
+
+    <form action="/review-order" method="POST" id="flavorForm">
+      <div class="flavor">
+        <div class="flavor-name">🍫 ช็อกโกแลต</div>
+        <div class="controls">
+          <button type="button" onclick="changeQuantity('chocolate', -1)">−</button>
+          <span id="chocolate-count">0</span>
+          <button type="button" onclick="changeQuantity('chocolate', 1)">＋</button>
+          <input type="hidden" name="chocolate" id="chocolate-input" value="0">
+        </div>
+      </div>
+
+      <div class="flavor">
+        <div class="flavor-name">🍶 ไวท์ช็อก</div>
+        <div class="controls">
+          <button type="button" onclick="changeQuantity('whitechoco', -1)">−</button>
+          <span id="whitechoco-count">0</span>
+          <button type="button" onclick="changeQuantity('whitechoco', 1)">＋</button>
+          <input type="hidden" name="whitechoco" id="whitechoco-input" value="0">
+        </div>
+      </div>
+
+      <div class="flavor">
+        <div class="flavor-name">🍓 สตรอเบอร์รี่</div>
+        <div class="controls">
+          <button type="button" onclick="changeQuantity('strawberry', -1)">−</button>
+          <span id="strawberry-count">0</span>
+          <button type="button" onclick="changeQuantity('strawberry', 1)">＋</button>
+          <input type="hidden" name="strawberry" id="strawberry-input" value="0">
+        </div>
+      </div>
+
+      <div class="total">
+        รวมทั้งหมด: <span id="total-count">0</span> ชิ้น
+      </div>
+
+      <div class="next-button">
+        <button type="submit">ไปต่อ ➡️</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    const flavors = ["chocolate", "whitechoco", "strawberry"];
+    const counts = {
+      chocolate: 0,
+      whitechoco: 0,
+      strawberry: 0
+    };
+
+    function changeQuantity(flavor, change) {
+      counts[flavor] = Math.max(0, counts[flavor] + change);
+      document.getElementById(`${flavor}-count`).innerText = counts[flavor];
+      document.getElementById(`${flavor}-input`).value = counts[flavor];
+      updateTotal();
+    }
+
+    function updateTotal() {
+      const total = flavors.reduce((sum, f) => sum + counts[f], 0);
+      document.getElementById('total-count').innerText = total;
+    }
+  </script>
+
+</body>
+</html>
