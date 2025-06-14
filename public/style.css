@@ -1,0 +1,15 @@
+body {
+    background-color: #ffe4ef;
+    font-family: 'Kanit', sans-serif;
+    text-align: center;
+    padding: 40px;
+}
+
+button {
+    background-color: #d14d72;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.2em;
+}
