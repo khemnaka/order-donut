@@ -1,30 +1,26 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const bodyParser = require('body-parser');
-const db = require('./DB');
 
-// ตั้งค่าการใช้ EJS และ static files
+// ตั้งค่าให้ใช้ EJS
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.urlencoded({ extended: false }));
 
-// เส้นทางไปยังหน้าแรก (Main)
+// middleware สำหรับรับข้อมูล form
+app.use(express.urlencoded({ extended: true }));
+
+// หน้าแรก
 app.get('/', (req, res) => {
-    res.render('index'); // ไปที่ views/index.ejs
+  res.render('welcome');
 });
 
-// เพิ่มเส้นทางอื่น ๆ เช่น step1, step2, confirm, payment
-app.get('/step1', (req, res) => {
-    res.render('step1');
+// รับจำนวนแล้วส่งไปหน้าต่อไป
+app.get('/select-donut', (req, res) => {
+  const quantity = req.query.quantity;
+  res.send(`คุณเลือกสั่ง ${quantity} ชิ้น (ยังไม่สร้างหน้าเลือกโดนัทนะ)`);
 });
 
-app.get('/step2', (req, res) => {
-    res.render('step2');
-});
-
-// รันเซิร์ฟเวอร์
+// เริ่มเซิร์ฟเวอร์
 app.listen(3000, () => {
-    console.log('Server รันที่ http://localhost:3000');
+  console.log('Server running on http://localhost:3000');
 });
