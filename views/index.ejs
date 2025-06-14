@@ -1,19 +1,96 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="th">
 <head>
-    <meta charset="UTF-8" />
-    <title>Order Donut - หน้าแรก</title>
-    <link rel="stylesheet" href="/css/style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Donut - หน้าแรก</title>
+  <style>
+    body {
+      font-family: 'Kanit', sans-serif;
+      background-color: #fff0f6;
+      padding: 20px;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 24px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      color: #e91e63;
+      text-align: center;
+    }
+
+    p {
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-top: 5px;
+    }
+
+    .next-button {
+      display: block;
+      margin-top: 30px;
+      text-align: right;
+    }
+
+    .next-button a {
+      background-color: #e91e63;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .next-button a:hover {
+      background-color: #c2185b;
+    }
+  </style>
 </head>
-
 <body>
-    <div class="container">
-        <img src="/images/logo.png" alt="Logo" />
-        <h1>Welcome to Your Sweet Moment!</h1>
-        <p>โดนัททำมือ หวานนุ่มละมุนหัวใจ 🍩</p>
-        <a href="/step1"><button>เริ่มสั่งโดนัท</button></a>
-    </div>
-</body>
 
+  <div class="container">
+    <h1>🍩 ยินดีต้อนรับ!</h1>
+    <p>โดนัทน่ารัก หวานนุ่มละลายในใจ!<br>
+    ขอให้วันนี้ของคุณนุ่มฟู เหมือนฉันนะ! ☁️🍓</p>
+
+    <p>
+      📦 <strong>จัดส่งเฉพาะวัน:</strong><br>
+      จันทร์ / อังคาร / พฤหัส / ศุกร์ (ช่วงเช้า)
+    </p>
+
+    <p>
+      📍 <strong>สถานที่นัดรับ:</strong><br>
+      หอพักหญิงอัลฟา, โอเมก้า และในมหาวิทยาลัยพายัพ ตามเวลาที่ตกลง
+    </p>
+
+    <form action="/select-donut" method="get">
+      <label for="quantity">เลือกจำนวนชิ้นที่ต้องการสั่ง:</label>
+      <input type="number" id="quantity" name="quantity" min="1" max="20" placeholder="เช่น 3" required>
+
+      <div class="next-button">
+        <button type="submit">ไปต่อ ➡️</button>
+      </div>
+    </form>
+  </div>
+
+</body>
 </html>
